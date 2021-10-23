@@ -2,7 +2,7 @@ using System.Text.Json;
 using Confluent.Kafka;
 using dotnet.messaging.domain;
 
-namespace dotnet.messaging.clients.Handlers
+namespace dotnet.messaging.clients.Handlers.Kafka
 {
     public class MessageSerializer : ISerializer<Message>, IDeserializer<Message>
     {
@@ -13,7 +13,7 @@ namespace dotnet.messaging.clients.Handlers
 
         public byte[] Serialize(Message data, SerializationContext context)
         {
-            return JsonSerializer.SerializeToUtf8Bytes(data, typeof(Message));
+            return JsonSerializer.SerializeToUtf8Bytes(data);
         }
     }
 }

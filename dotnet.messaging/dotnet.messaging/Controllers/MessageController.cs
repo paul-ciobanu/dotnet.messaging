@@ -11,13 +11,13 @@ namespace dotnet.messaging.Controllers
     {
         private readonly ILogger<MessageController> _logger;
         private readonly IMessageCache _messageCache;
-        private readonly IMessageProducer _messageProducer;
+        private readonly IEnumerable<IMessageProducer> _messageProducers;
 
-        public MessageController(ILogger<MessageController> logger, IMessageCache messageCache, IMessageProducer messageProducer)
+        public MessageController(ILogger<MessageController> logger, IMessageCache messageCache, IEnumerable<IMessageProducer> messageProducers)
         {
             _logger = logger;
             _messageCache = messageCache;
-            _messageProducer = messageProducer;
+            _messageProducers = messageProducers;
         }
 
         [HttpGet(Name = "GetAllMessages")]
@@ -29,7 +29,8 @@ namespace dotnet.messaging.Controllers
         [HttpPost(Name = "PostMessage")]
         public void Post([FromBody] string message)
         {
-            _messageProducer.Send(message);
+            foreach (var messageProducer in _messageProducers)
+                messageProducer.Send(message);
         }
     }
 }

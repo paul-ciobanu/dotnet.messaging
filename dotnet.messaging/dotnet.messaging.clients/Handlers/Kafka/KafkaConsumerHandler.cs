@@ -3,11 +3,11 @@ using dotnet.messaging.domain;
 using dotnet.messaging.domain.Cache;
 using Microsoft.Extensions.Hosting;
 
-namespace dotnet.messaging.clients.Handlers
+namespace dotnet.messaging.clients.Handlers.Kafka
 {
     public class KafkaConsumerHandler : IHostedService
     {
-        private readonly string _topic = "simpletalk_topic";
+        private readonly string _topic = "simpletalktopic";
 
         private readonly IConsumer<Ignore, Message> _consumer;
         private readonly IMessageWriteCache _messageWriter;
@@ -30,17 +30,27 @@ namespace dotnet.messaging.clients.Handlers
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            Task.Run(() => ConsumeMessages(cancellationToken), cancellationToken);
+            Task.Run(() => ConsumeMessages(), cancellationToken);
             return Task.CompletedTask;
         }
 
-        private void ConsumeMessages(CancellationToken cancellationToken)
+        private async Task ConsumeMessages()
         {
             while (true)
             {
-                var result = _consumer.Consume(cancellationToken);
-                _messageWriter.Add(result.Message.Value);
-                Console.WriteLine($"Message: {result.Message.Value} received from {result.TopicPartitionOffset}");
+                try
+                {
+                    var result = _consumer.Consume(TimeSpan.FromMilliseconds(100));
+                    if (result != null)
+                    {
+                        _messageWriter.Add(result.Message.Value);
+                        Console.WriteLine($"Message: {result.Message.Value} received from {result.TopicPartitionOffset}");
+                    }
+                }
+                catch
+                { }
+
+                await Task.Delay(250);
             }
         }
 

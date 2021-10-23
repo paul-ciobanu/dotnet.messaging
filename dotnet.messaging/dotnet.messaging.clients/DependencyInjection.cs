@@ -1,4 +1,6 @@
 using dotnet.messaging.clients.Handlers;
+using dotnet.messaging.clients.Handlers.Kafka;
+using dotnet.messaging.clients.Handlers.RabbitMQ;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace dotnet.messaging.clients
@@ -8,7 +10,10 @@ namespace dotnet.messaging.clients
         public static void AddClientServices(this IServiceCollection services)
         {
             services.AddHostedService<KafkaConsumerHandler>();
-            services.AddSingleton<IMessageProducer, KafkaProducerHandler>();
+            services.AddSingleton<IMessageProducer, KafkaMessageProducer>();
+
+            services.AddHostedService<RabbitMQConsumerHandler>();
+            services.AddSingleton<IMessageProducer, RabbitMQMessageProducer>();
         }
     }
 }

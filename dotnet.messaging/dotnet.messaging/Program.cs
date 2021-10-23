@@ -1,3 +1,4 @@
+using dotnet.messaging.clients;
 using dotnet.messaging.domain;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDomainServices();
+builder.Services.AddClientServices();
 
 var app = builder.Build();
 

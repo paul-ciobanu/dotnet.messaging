@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\dotnet.messaging.clients\dotnet.messaging.clients.csproj" />
+    <ProjectReference Include="..\dotnet.messaging.domain\dotnet.messaging.domain.csproj" />
+  </ItemGroup>
+
 </Project>

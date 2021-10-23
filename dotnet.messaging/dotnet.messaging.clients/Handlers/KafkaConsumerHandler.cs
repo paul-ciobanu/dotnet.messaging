@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace dotnet.messaging.clients.Handlers
 {
-    public class KafkaHandler : IHostedService
+    public class KafkaConsumerHandler : IHostedService
     {
         private readonly string _topic = "simpletalk_topic";
 

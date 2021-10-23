@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet.messaging", "dotnet.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet.messaging.clients", "dotnet.messaging.clients\dotnet.messaging.clients.csproj", "{E57D4F8E-61E5-409E-A199-8B688AFE3536}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet.messaging.domain", "dotnet.messaging.domain\dotnet.messaging.domain.csproj", "{687C46DF-F107-486E-923B-C65EF0ECCBA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E57D4F8E-61E5-409E-A199-8B688AFE3536}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E57D4F8E-61E5-409E-A199-8B688AFE3536}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E57D4F8E-61E5-409E-A199-8B688AFE3536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{687C46DF-F107-486E-923B-C65EF0ECCBA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{687C46DF-F107-486E-923B-C65EF0ECCBA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{687C46DF-F107-486E-923B-C65EF0ECCBA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{687C46DF-F107-486E-923B-C65EF0ECCBA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

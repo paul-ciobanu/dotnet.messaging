@@ -11,6 +11,7 @@ namespace dotnet.messaging.domain.Cache
         public IEnumerable<Message> GetAll()
         {
             var result = _messages.ToArray();
+            _messages.Clear();
             return result;
         }
     }

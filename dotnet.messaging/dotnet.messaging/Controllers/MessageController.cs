@@ -1,3 +1,4 @@
+using dotnet.messaging.clients.Handlers;
 using dotnet.messaging.domain;
 using dotnet.messaging.domain.Cache;
 using Microsoft.AspNetCore.Mvc;
@@ -8,16 +9,15 @@ namespace dotnet.messaging.Controllers
     [Route("[controller]")]
     public class MessageController : ControllerBase
     {
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<MessageController> _logger;
         private readonly IMessageCache _messageCache;
-        private readonly IMessageWriteCache _messageWrite;
-        private readonly Random _random = new();
+        private readonly IMessageProducer _messageProducer;
 
-        public MessageController(ILogger<WeatherForecastController> logger, IMessageCache messageCache, IMessageWriteCache messageWrite)
+        public MessageController(ILogger<MessageController> logger, IMessageCache messageCache, IMessageProducer messageProducer)
         {
             _logger = logger;
             _messageCache = messageCache;
-            _messageWrite = messageWrite;
+            _messageProducer = messageProducer;
         }
 
         [HttpGet(Name = "GetAllMessages")]
@@ -29,7 +29,7 @@ namespace dotnet.messaging.Controllers
         [HttpPost(Name = "PostMessage")]
         public void Post([FromBody] string message)
         {
-            _messageWrite.Add(new Message(_random.Next(), message));
+            _messageProducer.Send(message);
         }
     }
 }

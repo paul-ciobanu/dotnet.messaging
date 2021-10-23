@@ -7,8 +7,8 @@ namespace dotnet.messaging.clients
     {
         public static void AddClientServices(this IServiceCollection services)
         {
-            services.AddSingleton<KafkaConsumerHandler>();
-            services.AddSingleton<KafkaProducerHandler>();
+            services.AddHostedService<KafkaConsumerHandler>();
+            services.AddSingleton<IMessageProducer, KafkaProducerHandler>();
         }
     }
 }
